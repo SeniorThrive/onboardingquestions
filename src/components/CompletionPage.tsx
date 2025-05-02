@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuestionnaire } from '../context/QuestionnaireContext'
-import { default_api } from '../util/api'
+import * as api from '../util/api';
 
 import { Button } from './Button'
 interface CompletionPageProps {
@@ -17,7 +17,7 @@ const generateContactSummary = async (formData) => {
     Make it short and in a nice tone.
   `
 
-  const result = await default_api.get_llm_response(prompt = prompt)
+  const result = await api.get_llm_response(prompt = prompt)
   return result.response
 }
 

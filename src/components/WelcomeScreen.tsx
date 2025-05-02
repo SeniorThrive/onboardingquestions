@@ -1,79 +1,73 @@
 import React from 'react';
-import { Heart, Shield, Home, Clock } from 'lucide-react';
-import { Button } from './Button';
+import { Header } from './Header';
 
 interface WelcomeScreenProps {
   onStart: () => void;
 }
 
-export const WelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
+export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart }) => {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12 animate-fadeIn">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-blue-800 mb-6">
-          Let’s Personalize Your Thrive Experience
-        </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          A few quick answers today unlock smarter safety tips, wellness nudges, and a ThriveScore that actually means something to you.
-        </p>
-      </div>
+    <div className="bg-gray-50 min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-grow">
+        {/* Hero Section */}
+        <section className="text-center py-20 px-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-blue-800 mb-4">Let’s Personalize Your Thrive Experience</h1>
+          <p className="text-lg md:text-xl text-gray-700">A few quick answers today unlock smarter safety tips, wellness nudges, and a ThriveScore that actually means something to you.</p>
+        </section>
 
-      <div className="bg-white rounded-xl shadow-soft p-8 mb-12">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">
-          Why It Matters
-        </h2>
-        
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            <p className="text-lg text-gray-700">
+        {/* Value Proposition Section */}
+        <section className="py-16 px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-semibold text-blue-700 mb-6">Why It Matters</h2>
+            <p className="text-gray-700 text-lg md:text-xl">
               Your home, your habits, your goals—they’re all unique. When you fill out this profile, ThriveVision learns what thriving looks like for you and tailors every scan, score, and suggestion to fit.
             </p>
-            
-            <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600">
-              “Confidence at home isn’t about changing who you are. It’s about amplifying the life you love.”
-            </blockquote>
           </div>
-          
-          <div className="bg-blue-50 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-blue-800 mb-4">
-              What You’ll Get
-            </h3>
-            <ul className="space-y-4">
-              <li className="flex items-start">
-                <Clock className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0 mt-1" />
-                <span>⏱ 5–10 minutes from start to finish</span>
-              </li>
-              <li className="flex items-start">
-                <Shield className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0 mt-1" />
-                <span>Your information is private and secure</span>
-              </li>
-              <li className="flex items-start">
-                <Home className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0 mt-1" />
-                <span>🛠 Hyper-personal recommendations to boost safety and independence</span>
-              </li>
-              <li className="flex items-start">
-                <Heart className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0 mt-1" />
-                <span>❤️ Actionable tips and reminders that keep you moving forward</span>
-              </li>
-            </ul>
-            <div className='mt-6'>
-            <h3 className="text-lg font-semibold text-blue-800 mb-4">Pro Tip</h3>
-            <p>Watch the progress bar tick upward—each step powers ThriveVision and sharpens your ThriveScore in real time.</p>
+        </section>
+
+        {/* Quote Section */}
+        <section className="py-10 px-6 bg-gray-100">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-gray-700 italic text-lg md:text-xl">“Confidence at home isn’t about changing who you are. It’s about amplifying the life you love.”</p>
+          </div>
+        </section>
+
+        {/* Benefits/Features Section */}
+        <section className="py-16 px-6">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Box 1 */}
+            <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">                
+              <p className="text-gray-700 text-lg md:text-xl text-center">⏱ 5–10 minutes from start to finish</p>
+            </div>
+            {/* Box 2 */}
+            <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
+              <p className="text-gray-700 text-lg md:text-xl text-center">🔒 Guaranteed privacy—data is encrypted and never sold</p>
+            </div>
+            {/* Box 3 */}
+            <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
+              <p className="text-gray-700 text-lg md:text-xl text-center">🛠 Hyper-personal recommendations to boost safety and independence</p>
+            </div>
+            {/* Box 4 */}
+            <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
+              <p className="text-gray-700 text-lg md:text-xl text-center">❤️ Actionable tips and reminders that keep you moving forward</p>
             </div>
           </div>
-        </div>  
-      </div>
+        </section>
 
-      <div className="text-center space-y-6">
-        <Button 
-          variant="primary"
-          onClick={onStart}
-          className="text-xl px-12 py-4"
-        >
-          Start My Profile
-        </Button>
-        
-      </div>
+        {/* Pro Tip Section */}
+        <section className="py-10 px-6 bg-blue-100">
+          <div className="max-w-3xl mx-auto text-center">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-4">Pro Tip</h3>
+            <p className="text-gray-700 text-lg md:text-xl">Watch the progress bar tick upward—each step powers ThriveVision and sharpens your ThriveScore in real time.</p>
+          </div>
+        </section>
+
+        {/* Call to Action */}
+        <section className="py-16 px-6 text-center">
+          <button onClick={onStart} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full transition-colors duration-300 text-lg">Start My Profile</button>
+        </section>
+      </main>
     </div>
   );
 };

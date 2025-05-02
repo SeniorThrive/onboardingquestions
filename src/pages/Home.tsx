@@ -6,14 +6,15 @@ import { QuestionSection } from '../components/QuestionSection';
 import { SectionContainer } from '../components/SectionContainer';
 import { CompletionPage } from '../components/CompletionPage';
 import { WelcomeScreen } from '../components/WelcomeScreen';
+import { ProfileConfirmationScreen } from '../components/ProfileConfirmationScreen';
 import { useQuestionnaire } from '../context/QuestionnaireContext';
 
 export const Home = () => {
-  const { 
-    currentStep, 
-    totalSteps, 
-    goToNextStep, 
-    goToPreviousStep, 
+  const {
+    currentStep,
+    totalSteps,
+    goToNextStep,
+    goToPreviousStep,
     saveProgress,
     resetForm,
     isComplete,
@@ -22,42 +23,44 @@ export const Home = () => {
     hasStarted,
     startQuestionnaire
   } = useQuestionnaire();
-  
+
   const mainRef = useRef<HTMLDivElement>(null);
   const currentSection = getCurrentSection();
   const isValid = isCurrentSectionValid();
-  
+
   useEffect(() => {
-    if (mainRef.current) {     
-        mainRef.current.offsetHeight;
-        mainRef.current.scrollTo({ top: 0, behavior: 'auto' });        
-      }
+    if (mainRef.current) {
+      mainRef.current.offsetHeight;
+      mainRef.current.scrollTo({ top: 0, behavior: 'auto' });
+    }
   }, [currentStep]);
-  
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      
+
       <main ref={mainRef} className="flex-grow bg-gray-50 pb-16 overflow-y-auto">
         {!hasStarted ? (
           <WelcomeScreen onStart={startQuestionnaire} />
+        ) : currentStep === 0 ? (
+          <ProfileConfirmationScreen goToNextStep={goToNextStep} />
         ) : !isComplete ? (
           <div className="container mx-auto px-4 py-8 max-w-4xl">
-            <ProgressBar 
-              currentStep={currentStep} 
-              totalSteps={totalSteps} 
+            <ProgressBar
+              currentStep={currentStep}
+              totalSteps={totalSteps}
             />
-            
+
             {currentSection && (
-              <SectionContainer 
+              <SectionContainer
                 title={currentSection.title}
                 description={currentSection.description}
               >
                 <QuestionSection section={currentSection} />
               </SectionContainer>
             )}
-            
-            <NavigationButtons 
+
+            <NavigationButtons
               onNext={goToNextStep}
               onPrevious={goToPreviousStep}
               onSave={saveProgress}
@@ -71,7 +74,7 @@ export const Home = () => {
           <CompletionPage onReset={resetForm} />
         )}
       </main>
-      
+
       <footer className="bg-blue-800 text-white py-4">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm">&copy; 2025 SeniorThrive. All rights reserved.</p>

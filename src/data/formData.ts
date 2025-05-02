@@ -57,10 +57,18 @@ export const initialFormData: FormData = {
         id: 'fullName',
         type: 'text',
         label: 'Your full name is:',
-        required: true,
+        required: false,
         value: 'Jane Smith',
         prefilled: true,
-        socialProof: 'We\'ll greet you exactly the way you like—just tweak it if needed.'
+      },
+      preferredName: {
+        id: 'preferredName',
+        type: 'text',
+        socialProof: 'We\'ll greet you exactly the way you like—just tweak it if needed.',
+        label: 'Do you have a preferred name you would like us to use in the app?',
+        description: "This name will be used in the app and in any social features. You can use a nickname or your full name.",
+        required: false,
+        value: ''
       },
       address: {
         id: 'address',
@@ -285,6 +293,125 @@ export const initialFormData: FormData = {
           { value: 'rooms', label: 'Making every room in the house safer' }
         ],
         socialProof: 'Many members find that addressing these areas significantly increases their confidence at home.'
+      }
+    }
+  },
+    healthInfo: {
+    id: 'healthInfo',
+    title: '6. Your Health Status',
+    description: 'Tell us a bit about your current health status to tailor our recommendations.',
+    fields: {
+      healthCondition: {
+        id: 'healthCondition',
+        type: 'radio',
+        label: 'Do you have any chronic health conditions?',
+        required: true,
+        value: '',
+        options: [
+          { value: 'none', label: 'No' },
+          { value: 'one', label: 'Yes, one' },
+          { value: 'multiple', label: 'Yes, multiple' }
+        ]
+      },
+      generalHealth: {
+        id: 'generalHealth',
+        type: 'radio',
+        label: 'How would you rate your general health?',
+        required: true,
+        value: '',
+        options: [
+          { value: 'excellent', label: 'Excellent' },
+          { value: 'good', label: 'Good' },
+          { value: 'fair', label: 'Fair' },
+          { value: 'poor', label: 'Poor' }
+        ]
+      },
+      healthConcerns: {
+        id: 'healthConcerns',
+        type: 'checkbox',
+        label: 'Are there any specific health concerns you would like to address?',
+        required: true,
+        value: [],
+        options: [
+          { value: 'mobility', label: 'Mobility issues' },
+          { value: 'memory', label: 'Memory loss' },
+          { value: 'nutrition', label: 'Nutrition concerns' },
+          { value: 'mental', label: 'Mental health concerns' }
+        ]
+      }
+    }
+  },
+    supportInfo: {
+    id: 'supportInfo',
+    title: '7. Your Support Network',
+    description: 'Let us know about the people who support you.',
+    fields: {
+      caregivers: {
+        id: 'caregivers',
+        type: 'radio',
+        label: 'Do you have caregivers assisting you?',
+        required: true,
+        value: '',
+        options: [
+          { value: 'yes', label: 'Yes' },
+          { value: 'no', label: 'No' }
+        ]
+      },
+      familySupport: {
+        id: 'familySupport',
+        type: 'checkbox',
+        label: 'How does your family support you?',
+        required: true,
+        value: [],
+        options: [
+          { value: 'visits', label: 'Regular visits' },
+          { value: 'calls', label: 'Frequent calls' },
+          { value: 'meals', label: 'Meal preparation' }
+        ]
+      },
+      friendSupport: {
+        id: 'friendSupport',
+        type: 'text',
+        label: 'Do you have a good relationship with your friends?',
+        required: true,
+        value: '',
+      }
+    }
+  },
+    financialInfo: {
+    id: 'financialInfo',
+    title: '8. Your Financial Status',
+    description: 'Help us understand your financial situation for better recommendations.',
+    fields: {
+      financialSecurity: {
+        id: 'financialSecurity',
+        type: 'radio',
+        label: 'How financially secure do you feel?',
+        required: true,
+        value: '',
+        options: [
+          { value: 'verySecure', label: 'Very Secure' },
+          { value: 'somewhatSecure', label: 'Somewhat Secure' },
+          { value: 'notSecure', label: 'Not Secure' }
+        ]
+      },
+      savings: {
+        id: 'savings',
+        type: 'checkbox',
+        label: 'Do you have any savings?',
+        required: true,
+        value: [],
+        options: [
+          { value: 'retirement', label: 'Retirement Savings' },
+          { value: 'emergency', label: 'Emergency Fund' }
+        ]
+      },
+      financialConcerns: {
+        id: 'financialConcerns',
+        type: 'text',
+        label: 'Do you have any financial concerns?',
+        required: true,
+        value: ''
       }
     }
   }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface CheckboxOption {
   value: string;
@@ -22,8 +22,6 @@ interface CheckboxGroupProps {
   allowOther?: boolean;
   otherValue?: string;
   onOtherChange?: (value: string) => void;
-  maxReached?: boolean;
-  maxSelections?: number;
 }
 
 export const CheckboxGroup = ({
@@ -38,28 +36,14 @@ export const CheckboxGroup = ({
   allowOther = false,
   otherValue = '',
   onOtherChange,
-  maxReached,
-  maxSelections = 100,
 }: CheckboxGroupProps) => {
-  const [localMaxReached, setLocalMaxReached] = useState<boolean>(false);
 
   const handleChange = (value: string) => {
     let newValues;
     if (values.includes(value)) {
-        newValues = values.filter(v => v !== value);
-        if (localMaxReached && newValues.length < maxSelections) {
-          setLocalMaxReached(false)
-        }
+      newValues = values.filter(v => v !== value);
     } else {
-        if(values.length >= maxSelections){
-            setLocalMaxReached(true);
-            return;
-        }
-        if (localMaxReached && values.length < maxSelections) {
-          setLocalMaxReached(false);
-
-        }
-        newValues = [...values, value];
+      newValues = [...values, value];
     }
     onChange(newValues);
   };
@@ -72,17 +56,17 @@ export const CheckboxGroup = ({
           {required && <span className="text-red-500 ml-1">*</span>}
         </span>
       </div>
-      
+
       <div className="space-y-3">
         {options.map((option) => (
           <div key={option.value}>
-            <div 
+            <div
               className={`
                 relative border-2 rounded-lg p-4 transition-all duration-200
                 ${values.includes(option.value) ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}
               `}
             >
-              <label 
+              <label
                 htmlFor={`${id}-${option.value}`}
                 className="flex items-center cursor-pointer"
               >
@@ -97,7 +81,7 @@ export const CheckboxGroup = ({
                 <span className="ml-3 text-lg text-gray-700">{option.label}</span>
               </label>
             </div>
-            
+
             {values.includes(option.value) && option.conditionalField && (
               <div className="ml-8 mt-2">
                 <input
@@ -111,16 +95,16 @@ export const CheckboxGroup = ({
             )}
           </div>
         ))}
-        
+
         {allowOther && (
           <div className="space-y-2">
-            <div 
+            <div
               className={`
                 relative border-2 rounded-lg p-4 transition-all duration-200
                 ${values.includes('other') ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}
               `}
             >
-              <label 
+              <label
                 htmlFor={`${id}-other`}
                 className="flex items-center cursor-pointer"
               >
@@ -135,7 +119,7 @@ export const CheckboxGroup = ({
                 <span className="ml-3 text-lg text-gray-700">Other</span>
               </label>
             </div>
-            
+
             {values.includes('other') && onOtherChange && (
               <div className="ml-8 mt-2">
                 <input
@@ -150,14 +134,9 @@ export const CheckboxGroup = ({
           </div>
         )}
       </div>
-      
+
       {error && (
         <p className="mt-2 text-red-600 text-sm">{error}</p>
-      )}
-      {localMaxReached && (
-        <p className="mt-2 text-red-600 text-sm">
-        You can select up to {maxSelections} options.
-      </p>
       )}
     </div>
   );

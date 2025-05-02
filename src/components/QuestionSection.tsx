@@ -18,6 +18,24 @@ export const QuestionSection = ({ section }: QuestionSectionProps) => {
   const renderField = (fieldId: string, field: FormField) => {
     switch (field.type) {
       case 'text':
+        if (fieldId === 'preferredName' || fieldId === 'fullName' || fieldId === 'address') {
+          return (
+            <QuestionCard required={field.required}>
+              <TextField
+                id={fieldId}
+                label={field.label}
+                value={field.value}
+                onChange={(value) =>
+                  updateFormData(section.id, fieldId, value)
+                }
+                required={field.required}
+                prefilled={field.prefilled}
+                placeholder={field.placeholder}
+              />
+            </QuestionCard>
+          );
+        }
+        
         const isTextAnswered = field.value !== '';
         return (
           <QuestionCard
@@ -82,7 +100,6 @@ export const QuestionSection = ({ section }: QuestionSectionProps) => {
               allowOther={field.allowOther}
               otherValue={field.otherValue || ''}
               onOtherChange={(value) => updateOtherValue(section.id, fieldId, value)}
-              maxSelections={fieldId === 'peaceMindAreas' ? 3 : undefined}
             />
           </QuestionCard>
         );
