@@ -72,83 +72,6 @@ export const initialFormData: FormData = {
         socialProof: 'Confirm your address so our tips and local resources are spot-on.',
         illustration: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg'
       },
-      language: {
-        id: 'language',
-        type: 'radio',
-        label: 'Which language feels most comfortable for you?',
-        description: 'We want to communicate in the way that works best for you.',
-        required: true,
-        value: '',
-        options: [
-          { 
-            value: 'english', 
-            label: 'English',
-            conditionalField: {
-              type: 'text',
-              placeholder: 'Preferred dialect (if any)'
-            }
-          },
-          { 
-            value: 'spanish', 
-            label: 'Español',
-            conditionalField: {
-              type: 'text',
-              placeholder: 'Dialecto preferido (si aplica)'
-            }
-          },
-          { 
-            value: 'french', 
-            label: 'Français',
-            conditionalField: {
-              type: 'text',
-              placeholder: 'Dialecte préféré (si applicable)'
-            }
-          },
-          { 
-            value: 'chinese', 
-            label: '中文',
-            conditionalField: {
-              type: 'text',
-              placeholder: '首选方言（如果有）'
-            }
-          },
-          { 
-            value: 'other', 
-            label: 'Other language' 
-          }
-        ],
-        allowOther: true,
-        otherValue: '',
-        socialProof: 'Many members find they feel more at ease when communicating in their preferred language.',
-        illustration: 'https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg'
-      },
-      notifications: {
-        id: 'notifications',
-        type: 'checkbox',
-        label: 'How would you prefer to receive helpful notifications?',
-        required: true,
-        value: [],
-        options: [
-          { 
-            value: 'text', 
-            label: 'Text message',
-            conditionalField: {
-              type: 'tel',
-              placeholder: 'Enter your mobile number'
-            }
-          },
-          { 
-            value: 'email', 
-            label: 'Email',
-            conditionalField: {
-              type: 'email',
-              placeholder: 'Enter your email address'
-            }
-          },
-          { value: 'app', label: 'Mobile app notifications' },
-          { value: 'phone', label: 'Phone call' }
-        ]
-      }
     }
   },
   homeInfo: {
@@ -163,7 +86,7 @@ export const initialFormData: FormData = {
         required: true,
         value: '',
         options: [
-          { value: 'house', label: 'House with character' },
+          { value: 'house', label: 'House' },
           { value: 'apartment', label: 'Apartment/Condo' },
           { value: 'assisted', label: 'Assisted Living' },
           { value: 'other', label: 'Something else' }

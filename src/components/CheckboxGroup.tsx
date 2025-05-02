@@ -22,6 +22,7 @@ interface CheckboxGroupProps {
   allowOther?: boolean;
   otherValue?: string;
   onOtherChange?: (value: string) => void;
+  maxReached?: boolean;
 }
 
 export const CheckboxGroup = ({
@@ -36,11 +37,18 @@ export const CheckboxGroup = ({
   allowOther = false,
   otherValue = '',
   onOtherChange,
+  maxReached,
 }: CheckboxGroupProps) => {
   const handleChange = (value: string) => {
-    const newValues = values.includes(value)
-      ? values.filter(v => v !== value)
-      : [...values, value];
+    let newValues;
+    if (values.includes(value)) {
+        newValues = values.filter(v => v !== value);
+    } else {
+        if(values.length >= 3){
+            return;
+        }
+        newValues = [...values, value];
+    }
     onChange(newValues);
   };
 
@@ -133,6 +141,9 @@ export const CheckboxGroup = ({
       
       {error && (
         <p className="mt-2 text-red-600 text-sm">{error}</p>
+      )}
+      {maxReached && (
+        <p className="mt-2 text-red-600 text-sm">You can only select up to 3 options.</p>
       )}
     </div>
   );

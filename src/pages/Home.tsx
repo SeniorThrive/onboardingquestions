@@ -29,7 +29,9 @@ export const Home = () => {
   
   useEffect(() => {
     if (mainRef.current) {
-      mainRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        mainRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 0);
     }
   }, [currentStep]);
   

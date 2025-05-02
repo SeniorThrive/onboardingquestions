@@ -59,13 +59,13 @@ export const ImageUpload = ({
           <div className="relative inline-block">
             <img
               src={value}
-              alt="Profile"
-              className="w-32 h-32 object-cover rounded-full border-4 border-white shadow-md"
+              alt="Uploaded"
+              className="w-24 h-24 object-cover rounded-lg border-4 border-white shadow-md"
             />
             <button
               type="button"
               onClick={handleRemove}
-              className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
+              className="absolute -top-2 -right-2 bg-red-500 text-white rounded-lg p-1 hover:bg-red-600 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -73,10 +73,10 @@ export const ImageUpload = ({
         ) : (
           <div
             onClick={() => fileInputRef.current?.click()}
-            className="w-32 h-32 border-2 border-dashed border-gray-300 rounded-full flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition-colors"
+            className="w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition-colors"
           >
             <Upload className="w-8 h-8 text-gray-400" />
-            <span className="mt-2 text-sm text-gray-500">Upload Photo</span>
+            <span className="mt-2 text-sm text-gray-500">Click or Drop Photo Here</span>
           </div>
         )}
         
