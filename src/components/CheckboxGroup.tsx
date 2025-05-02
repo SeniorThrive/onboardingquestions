@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface CheckboxOption {
   value: string;
@@ -23,6 +23,7 @@ interface CheckboxGroupProps {
   otherValue?: string;
   onOtherChange?: (value: string) => void;
   maxReached?: boolean;
+  maxSelections?: number;
 }
 
 export const CheckboxGroup = ({
@@ -38,14 +39,25 @@ export const CheckboxGroup = ({
   otherValue = '',
   onOtherChange,
   maxReached,
+  maxSelections = 100,
 }: CheckboxGroupProps) => {
+  const [localMaxReached, setLocalMaxReached] = useState<boolean>(false);
+
   const handleChange = (value: string) => {
     let newValues;
     if (values.includes(value)) {
         newValues = values.filter(v => v !== value);
+        if (localMaxReached && newValues.length < maxSelections) {
+          setLocalMaxReached(false)
+        }
     } else {
-        if(values.length >= 3){
+        if(values.length >= maxSelections){
+            setLocalMaxReached(true);
             return;
+        }
+        if (localMaxReached && values.length < maxSelections) {
+          setLocalMaxReached(false);
+
         }
         newValues = [...values, value];
     }
@@ -142,8 +154,10 @@ export const CheckboxGroup = ({
       {error && (
         <p className="mt-2 text-red-600 text-sm">{error}</p>
       )}
-      {maxReached && (
-        <p className="mt-2 text-red-600 text-sm">You can only select up to 3 options.</p>
+      {localMaxReached && (
+        <p className="mt-2 text-red-600 text-sm">
+        You can select up to {maxSelections} options.
+      </p>
       )}
     </div>
   );

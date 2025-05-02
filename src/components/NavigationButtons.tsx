@@ -9,6 +9,7 @@ interface NavigationButtonsProps {
   isFirstStep: boolean;
   isLastStep: boolean;
   isValid: boolean;
+  showError: boolean;
 }
 
 export const NavigationButtons = ({
@@ -18,6 +19,7 @@ export const NavigationButtons = ({
   isFirstStep,
   isLastStep,
   isValid,
+  showError
 }: NavigationButtonsProps) => {
   return (
     <div className="flex justify-between mt-8">
@@ -29,7 +31,7 @@ export const NavigationButtons = ({
           </Button>
         )}
       </div>
-      <div className="flex space-x-4">
+      <div className="flex flex-col md:flex-row md:space-x-4">
         <Button 
           variant="outline" 
           onClick={onSave}
@@ -62,6 +64,7 @@ export const NavigationButtons = ({
           </Button>
         )}
       </div>
+      {showError && <p className="text-red-500 mt-2">Please answer all required questions to proceed.</p>}
     </div>
   );
 };

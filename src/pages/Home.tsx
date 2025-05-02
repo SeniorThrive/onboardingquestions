@@ -28,11 +28,10 @@ export const Home = () => {
   const isValid = isCurrentSectionValid();
   
   useEffect(() => {
-    if (mainRef.current) {
-      setTimeout(() => {
-        mainRef.current.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 0);
-    }
+    if (mainRef.current) {     
+        mainRef.current.offsetHeight;
+        mainRef.current.scrollTo({ top: 0, behavior: 'auto' });        
+      }
   }, [currentStep]);
   
   return (
@@ -65,6 +64,7 @@ export const Home = () => {
               isFirstStep={currentStep === 1}
               isLastStep={currentStep === totalSteps}
               isValid={isValid}
+              showError={!isValid}
             />
           </div>
         ) : (

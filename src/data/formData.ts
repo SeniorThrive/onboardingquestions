@@ -173,11 +173,24 @@ export const initialFormData: FormData = {
           { value: 'walker', label: 'A walker or rollator' },
           { value: 'wheelchair', label: 'A wheelchair for mobility' },
           { value: 'other', label: 'Other helpful tools' }
-        ],
-        allowOther: true,
-        otherValue: '',
-        illustration: 'https://images.pexels.com/photos/7551665/pexels-photo-7551665.jpeg'
+        ],        
       },
+      mobilityAids: {
+        id: 'mobilityAids',
+        type: 'radio',
+        label: 'Do you use any tools to help with getting around?',
+        required: true,
+        value: '',
+        options: [
+          { value: 'none', label: 'Moving freely without aids' },
+          { value: 'cane', label: 'A cane for extra stability' },
+          { value: 'walker', label: 'A walker or rollator' },
+          { value: 'wheelchair', label: 'A wheelchair for mobility' },
+          { value: 'other', label: 'Other helpful tools', conditionalField: { type: 'text', placeholder: 'Please specify' } }],
+          allowOther: true,
+          otherValue: '',
+          illustration: 'https://images.pexels.com/photos/7551665/pexels-photo-7551665.jpeg'
+        },
       strengths: {
         id: 'strengths',
         type: 'checkbox',
@@ -256,15 +269,20 @@ export const initialFormData: FormData = {
       peaceMindAreas: {
         id: 'peaceMindAreas',
         type: 'checkbox',
-        label: 'Which aspects of home life would you like additional peace of mind about?',
+        label: 'Where could a little extra help from SeniorThrive give you more confidence at home?',
         required: true,
         value: [],
-        options: [
-          { value: 'falls', label: 'Moving confidently without falls' },
-          { value: 'fire', label: 'Fire safety' },
-          { value: 'security', label: 'Home security' },
-          { value: 'medication', label: 'Medication management' },
-          { value: 'emergency', label: 'Emergency communication' }
+         options: [
+          { value: 'fitness', label: 'Keeping fit and active' },
+          { value: 'medications', label: 'Taking medications on time' },
+          { value: 'falls', label: 'Detecting falls right away' },
+          { value: 'mood', label: 'Lifting mood and easing stress' },
+          { value: 'vitals', label: 'Tracking health vitals like blood pressure and temperature' },
+          { value: 'hobbies', label: 'Discovering and enjoying new hobbies' },
+          { value: 'social', label: 'Staying in touch with family and friends' },
+          { value: 'caregivers', label: 'Coordinating with professional caregivers' },
+          { value: 'pets', label: 'Keeping an eye on pets' },
+          { value: 'rooms', label: 'Making every room in the house safer' }
         ],
         socialProof: 'Many members find that addressing these areas significantly increases their confidence at home.'
       }

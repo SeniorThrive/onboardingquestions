@@ -13,16 +13,19 @@ interface QuestionSectionProps {
 }
 
 export const QuestionSection = ({ section }: QuestionSectionProps) => {
-  const { updateFormData, updateOtherValue, updateConditionalField } = useQuestionnaire();
+  const { updateFormData, updateOtherValue, updateConditionalField, formState } = useQuestionnaire();
   
   const renderField = (fieldId: string, field: FormField) => {
     switch (field.type) {
       case 'text':
+        const isTextAnswered = field.value !== '';
         return (
           <QuestionCard
             required={field.required}
             illustration={field.illustration}
             socialProof={field.socialProof}
+            isAnswered={isTextAnswered}
+
           >
             <TextField
               id={fieldId}
@@ -37,10 +40,13 @@ export const QuestionSection = ({ section }: QuestionSectionProps) => {
         );
       
       case 'radio':
+        const isRadioAnswered = field.value !== '';
+
         return (
           <QuestionCard
             required={field.required}
             illustration={field.illustration}
+            isAnswered={isRadioAnswered}
             socialProof={field.socialProof}
           >
             <RadioGroup
@@ -55,9 +61,11 @@ export const QuestionSection = ({ section }: QuestionSectionProps) => {
         );
       
       case 'checkbox':
+        const isCheckboxAnswered = Array.isArray(field.value) && field.value.length > 0;
         return (
           <QuestionCard
             required={field.required}
+            isAnswered={isCheckboxAnswered}
             illustration={field.illustration}
             socialProof={field.socialProof}
           >
@@ -74,11 +82,14 @@ export const QuestionSection = ({ section }: QuestionSectionProps) => {
               allowOther={field.allowOther}
               otherValue={field.otherValue || ''}
               onOtherChange={(value) => updateOtherValue(section.id, fieldId, value)}
+              maxSelections={fieldId === 'peaceMindAreas' ? 3 : undefined}
             />
           </QuestionCard>
         );
       
       case 'image':
+        const isImageAnswered = field.value !== undefined;
+
         return (
           <QuestionCard
             required={field.required}
@@ -90,6 +101,7 @@ export const QuestionSection = ({ section }: QuestionSectionProps) => {
               onChange={(value) => updateFormData(section.id, fieldId, value)}
               required={field.required}
             />
+             
           </QuestionCard>
         );
       
